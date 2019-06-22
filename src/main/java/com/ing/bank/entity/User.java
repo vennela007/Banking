@@ -2,7 +2,6 @@ package com.ing.bank.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,13 +19,12 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
+public class User implements Serializable {
 
-public class User implements Serializable{
-	
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long userId;
 	private String userName;
 	private String accountType;
@@ -41,4 +39,5 @@ public class User implements Serializable{
 	private String loginName;
 	private String password;
 	private String role;
+	private String status;
 }
