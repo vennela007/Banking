@@ -35,7 +35,7 @@ public class Account implements Serializable{/**
 	private String status;
 	@OneToOne
 	@JoinColumn(name="userId")
-	private User user
+	private User user;
 
 }
 

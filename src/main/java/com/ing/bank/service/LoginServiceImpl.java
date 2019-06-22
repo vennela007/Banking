@@ -4,20 +4,23 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ing.bank.dto.CustomerDTO;
-import com.ing.bank.entity.Customer;
+import com.ing.bank.dto.UserDTO;
+import com.ing.bank.entity.User;
+import com.ing.bank.repository.UserRepository;
 
 @Service
 public class LoginServiceImpl implements LoginService {
-@Autowired
+	@Autowired
+	UserRepository userRepository;
+	
 
-	
-	public CustomerDTO login(String loginName, String password) {
-		CustomerDTO customerDTO = new CustomerDTO();
-		Customer customer = employeeRepository.findByLoginIdAndPassword(loginId, password);
-		BeanUtils.copyProperties(customer, customerDTO);
-		return customerDTO;	
-	
+	public UserDTO login(String loginName, String password) {
+		UserDTO userDTO = new UserDTO();
+		User user = userRepository.findByLoginNameAndPassword(loginName, password);
+		
+		BeanUtils.copyProperties(user, userDTO);
+		return userDTO;
+
 	}
 
 }

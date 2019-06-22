@@ -1,9 +1,9 @@
 package com.ing.bank.service;
 
-import com.ing.bank.dto.CustomerDTO;
+import com.ing.bank.dto.UserDTO;
 
 public interface LoginService {
 
-	CustomerDTO login(String loginName, String password);
+	UserDTO login(String loginName, String password);
 
 }

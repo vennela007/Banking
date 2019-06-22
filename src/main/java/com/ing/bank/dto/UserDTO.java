@@ -12,14 +12,13 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class CustomerDTO implements Serializable {
-
+public class UserDTO implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Long customerId;
-	private String customerName;
+	private Long userId;
+	private String userName;
 	private String accountType;
 	private Long mobileNumber;
 	private String email;
@@ -29,4 +28,7 @@ public class CustomerDTO implements Serializable {
 	private int age;
 	private LocalDate creationDate;
 	private Long aadharNumber;
+	private String loginName;
+	private String password;
+	private String role;
 }
