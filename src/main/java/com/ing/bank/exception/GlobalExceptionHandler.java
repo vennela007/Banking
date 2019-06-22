@@ -8,6 +8,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+<<<<<<< HEAD
 
 	@ExceptionHandler(value = { UserNotFoundException.class })
 	public ResponseEntity<ResponseError> loginError(Exception e) {
@@ -17,4 +18,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<>(loginError, HttpStatus.NOT_FOUND);
 
 	}
+=======
+	
+	@ExceptionHandler(value = UserNotFoundException.class )
+	public ResponseEntity<ResponseError> mapException(Exception e){
+		ResponseError error = new ResponseError();
+		error.setMessage(e.getMessage());
+		return new ResponseEntity<>(error,HttpStatus.CREATED);
+		
+	}
+
+>>>>>>> de16fd191f44660469f99536045ce97c7bd33989
 }

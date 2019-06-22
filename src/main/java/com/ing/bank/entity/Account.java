@@ -34,7 +34,6 @@ public class Account implements Serializable {
 	private String accountType;
 	private LocalDate creationDate;
 	private double balance;
-	private String status;
 	@OneToOne
 	@JoinColumn(name = "userId")
 	private User user;

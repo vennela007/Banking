@@ -12,10 +12,9 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
+
 public class UserDTO implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private Long userId;
 	private String userName;
@@ -31,5 +30,11 @@ public class UserDTO implements Serializable {
 	private String loginName;
 	private String password;
 	private String role;
+<<<<<<< HEAD
 	private String status;
+=======
+
+	private String status;
+
+>>>>>>> de16fd191f44660469f99536045ce97c7bd33989
 }
