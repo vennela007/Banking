@@ -8,13 +8,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
+
 public class UserDTO implements Serializable{
 	
+
+public class UserDTO implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 	private Long userId;
 	private String userName;
@@ -30,6 +33,9 @@ public class UserDTO implements Serializable{
 	private String loginName;
 	private String password;
 	private String role;
+
 	private String status;
+
+
 
 }
