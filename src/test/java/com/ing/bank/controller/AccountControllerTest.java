@@ -15,14 +15,16 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ing.bank.dto.AccountDTO;
+import com.ing.bank.dto.AccountRequestDTO;
 import com.ing.bank.service.AccountService;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(value = AccountControllerTest.class, secure = false)
+@WebMvcTest(value = AccountController.class, secure = false)
 public class AccountControllerTest {
 
 	@Autowired
@@ -30,6 +32,17 @@ public class AccountControllerTest {
 
 	@MockBean
 	private AccountService accountService;
+
+	@Test
+	public void approve() throws JsonProcessingException, Exception {
+		AccountRequestDTO accountRequestDTO = new AccountRequestDTO();
+		accountRequestDTO.setStatus("test");
+		AccountDTO accountDTO = new AccountDTO();
+		accountDTO.setAccountId(1L);
+		Mockito.when(accountService.approve(accountRequestDTO)).thenReturn(accountDTO);
+		mockMvc.perform(MockMvcRequestBuilders.put("/api/approve").contentType(MediaType.APPLICATION_JSON)
+				.content(mapToJson(accountRequestDTO))).andExpect(MockMvcResultMatchers.status().isAccepted());
+	}
 
 	@Test
 	public void getSummary() throws Exception {
@@ -54,4 +67,5 @@ public class AccountControllerTest {
 		ObjectMapper objectMapper = new ObjectMapper();
 		return objectMapper.writeValueAsString(object);
 	}
+
 }
