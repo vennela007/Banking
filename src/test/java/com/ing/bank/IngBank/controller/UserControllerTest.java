@@ -1,5 +1,8 @@
 package com.ing.bank.ingbank.controller;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -9,37 +12,35 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ing.bank.controller.LoginController;
+import com.ing.bank.controller.UserController;
 import com.ing.bank.dto.UserDTO;
-import com.ing.bank.service.LoginService;
+import com.ing.bank.entity.User;
+import com.ing.bank.service.UserService;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(value = LoginController.class)
-public class LoginControllerTest {
-
+@WebMvcTest(value = UserController.class)
+public class UserControllerTest {
 	@Autowired
 	MockMvc mockMvc;
 
 	@MockBean
-	LoginService loginService;
-
+	UserService userService;
+	UserDTO userDTO;
+	User user;
 	@Test
-	public void testLogin() throws Exception {
-
-		UserDTO userDto = new UserDTO();
-		userDto.setLoginName("sample");
-		userDto.setPassword("sample");
-		Mockito.when(loginService.login("sample", "sample")).thenReturn(userDto);
-		mockMvc.perform(MockMvcRequestBuilders.put("/api/login")
-				.contentType(MediaType.APPLICATION_JSON).content(asJsonString(userDto)))
-				.andExpect(MockMvcResultMatchers.status().isOk());
-
+	public void userRegistrationTest() throws Exception {
+		userDTO = new UserDTO();
+		userDTO.setAccountType("savings");
+		user = new User();
+		user.setAccountType("savings");
+		Mockito.when(userService.userRegistration(userDTO)).thenReturn(userDTO);
+		mockMvc.perform(post("/api/registration").contentType(MediaType.APPLICATION_JSON).content(asJsonString(userDTO)))
+		.andExpect(MockMvcResultMatchers.status().isCreated());
 	}
-
+	
 	public static String asJsonString(final Object obj) {
 		try {
 			return new ObjectMapper().writeValueAsString(obj);

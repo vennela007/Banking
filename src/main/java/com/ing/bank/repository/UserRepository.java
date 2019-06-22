@@ -10,7 +10,7 @@ import com.ing.bank.entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-	public List<User> findByStatusAndRole(String status, String Role);
+	public List<User> findByStatusAndRole(String status, String role);
 
 	public User findByUserId(Long userId);
 

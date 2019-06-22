@@ -6,12 +6,15 @@ import java.time.LocalDate;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+
+
+
+	
+
 public class UserDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -29,6 +32,9 @@ public class UserDTO implements Serializable {
 	private String loginName;
 	private String password;
 	private String role;
+
 	private String status;
+
+
 
 }
