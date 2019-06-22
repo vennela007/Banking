@@ -12,12 +12,10 @@ import com.ing.bank.repository.UserRepository;
 public class LoginServiceImpl implements LoginService {
 	@Autowired
 	UserRepository userRepository;
-	
 
 	public UserDTO login(String loginName, String password) {
 		UserDTO userDTO = new UserDTO();
 		User user = userRepository.findByLoginNameAndPassword(loginName, password);
-		
 		BeanUtils.copyProperties(user, userDTO);
 		return userDTO;
 
