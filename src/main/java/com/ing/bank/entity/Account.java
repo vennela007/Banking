@@ -1,4 +1,5 @@
 package com.ing.bank.entity;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -21,12 +22,13 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class Account implements Serializable{/**
-	 * 
-	 */
+public class Account implements Serializable {
+	/**
+	* 
+	*/
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long accountId;
 	private String accountNumber;
 	private String accountType;
@@ -34,8 +36,7 @@ public class Account implements Serializable{/**
 	private double balance;
 	private String status;
 	@OneToOne
-	@JoinColumn(name="userId")
+	@JoinColumn(name = "userId")
 	private User user;
 
 }
-

@@ -1,4 +1,4 @@
-package com.ing.bank.dto;
+package com.ing.bank.exception;
 
 import java.io.Serializable;
 
@@ -11,13 +11,15 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class LoginDTO implements Serializable {
+public class ResponseError implements Serializable {
+
 	/**
-	* 
-	*/
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
+	private String errorMessage;
 
-	private String loginName;
-	private String password;
-
+	public ResponseError(String message) {
+		this.errorMessage = message;
+	}
 }
