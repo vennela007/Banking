@@ -1,5 +1,4 @@
 package com.ing.bank.entity;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -7,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -20,24 +21,21 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-
-public class Customer implements Serializable{
-	
+public class Account implements Serializable{/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long customerId;
-	private String customerName;
+	private Long accountId;
+	private String accountNumber;
 	private String accountType;
-	private Long mobileNumber;
-	private String email;
-	private String address;
-	private String nominee;
-	private String nomineeRelation;
-	private int age;
 	private LocalDate creationDate;
-	private Long aadharNumber;
-	private String loginName;
-	private String password;
+	private double balance;
+	private String status;
+	@OneToOne
+	@JoinColumn(name="userId")
+	private User user
+
 }
+
