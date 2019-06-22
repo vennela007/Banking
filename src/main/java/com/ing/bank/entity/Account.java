@@ -34,8 +34,8 @@ public class Account implements Serializable{/**
 	private double balance;
 	private String status;
 	@OneToOne
-	@JoinColumn(name="customerId")
-	private Customer customer;
+	@JoinColumn(name="userId")
+	private User user
 
 }
 

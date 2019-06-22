@@ -21,14 +21,14 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 
-public class Customer implements Serializable{
+public class User implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long customerId;
-	private String customerName;
+	private Long userId;
+	private String userName;
 	private String accountType;
 	private Long mobileNumber;
 	private String email;
@@ -40,4 +40,5 @@ public class Customer implements Serializable{
 	private Long aadharNumber;
 	private String loginName;
 	private String password;
+	private String role;
 }
