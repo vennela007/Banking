@@ -9,8 +9,7 @@ import com.ing.bank.entity.Account;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
-	//Account findByUser(Long userId);
-	@Query(value="select * from account where user_id=?",nativeQuery = true)
+	@Query(value = "select * from account where user_id=?", nativeQuery = true)
 	Account findUser(Long userId);
 
 }

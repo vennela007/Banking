@@ -8,25 +8,27 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
-public class AccountDTO implements Serializable {
+public class UserDTO implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-
-	private Long accountId;
-	private String accountNumber;
-	private String accountType;
-	private LocalDate creationDate;
-	private double balance;
-	private String status;
 	private Long userId;
-	private String message;
+	private String userName;
+	private String accountType;
+	private Long mobileNumber;
+	private String email;
+	private String address;
+	private String nominee;
+	private String nomineeRelation;
+	private int age;
+	private LocalDate creationDate;
+	private Long aadharNumber;
+	private String loginName;
+	private String password;
+	private String role;
+	private String status;
 
 }
