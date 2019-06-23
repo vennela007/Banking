@@ -37,14 +37,6 @@ public class AccountServiceImpl implements AccountService {
 			BeanUtils.copyProperties(account, accountDTO);
 			accountDTOs.add(accountDTO);
 		}
-		/*
-		 * accountDTO.setAccountId(account.getAccountId());
-		 * accountDTO.setAccountNumber(account.getAccountNumber());
-		 * accountDTO.setAccountType(account.getAccountType());
-		 * accountDTO.setBalance(account.getBalance());
-		 * accountDTO.setCreationDate(account.getCreationDate());
-		 * accountDTO.setStatus(account.getUser().getStatus());
-		 */
 		return accountDTOs;
 	}
 
