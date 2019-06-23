@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ing.bank.dto.AccountDTO;
+import com.ing.bank.dto.AccountNumberDTO;
 import com.ing.bank.dto.AccountRequestDTO;
 import com.ing.bank.service.AccountService;
 
@@ -40,5 +41,11 @@ public class AccountController {
 		logger.info("approve");
 		AccountDTO accountDTO = accountService.approve(accountRequestDTO);
 		return new ResponseEntity<>(accountDTO, HttpStatus.ACCEPTED);
+	}
+
+	@PutMapping("/accounts")
+	public ResponseEntity<List<AccountDTO>> getAccounts(@RequestBody AccountNumberDTO accountNumberDTO) {
+		List<AccountDTO> listAccountDTO = accountService.fetchAccounts(accountNumberDTO.getAccountNumber());
+		return new ResponseEntity<>(listAccountDTO, HttpStatus.OK);
 	}
 }

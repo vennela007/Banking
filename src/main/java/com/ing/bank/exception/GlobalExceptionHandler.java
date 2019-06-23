@@ -20,7 +20,16 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	public ResponseEntity<ResponseError> mapException(Exception e) {
 		ResponseError error = new ResponseError();
 		error.setErrorMessage(e.getMessage());
-		return new ResponseEntity<>(error, HttpStatus.CREATED);
+		return new ResponseEntity<>(error, HttpStatus.NOT_ACCEPTABLE);
+
+	}
+	
+
+	@ExceptionHandler(value = InsufficientBalanceException.class)
+	public ResponseEntity<ResponseError> balanceError(Exception e) {
+		ResponseError balanceError = new ResponseError();
+		balanceError.setErrorMessage(e.getMessage());
+		return new ResponseEntity<>(balanceError, HttpStatus.NOT_ACCEPTABLE);
 
 	}
 

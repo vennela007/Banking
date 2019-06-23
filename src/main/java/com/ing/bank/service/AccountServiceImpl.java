@@ -25,21 +25,20 @@ public class AccountServiceImpl implements AccountService {
 	@Autowired
 	private AccountRepository accountRepository;
 
-
 	private UserRepository userRepository;
 
 	@Override
 	public List<AccountDTO> fetchAccountSummary(Long userId) {
 		List<AccountDTO> accountDTOs = new ArrayList<AccountDTO>();
 		List<Account> accounts = accountRepository.findUser(userId);
-		for(Account account: accounts) {
+		for (Account account : accounts) {
 			AccountDTO accountDTO = new AccountDTO();
 			BeanUtils.copyProperties(account, accountDTO);
 			accountDTOs.add(accountDTO);
 		}
 		return accountDTOs;
-	}
 
+	}
 
 	@Override
 	public AccountDTO approve(AccountRequestDTO accountRequestDTO) {
@@ -47,22 +46,22 @@ public class AccountServiceImpl implements AccountService {
 		AccountDTO accountDTO = new AccountDTO();
 		User user = userRepository.findById(accountRequestDTO.getUserId()).orElse(null);
 
-		if(user!=null) {
-			if(accountRequestDTO.getStatus().trim().equalsIgnoreCase("approve")) {
-			Account account = new Account();
-			String mobString = String.valueOf(user.getMobileNumber());
-			account.setAccountNumber("12345"+mobString.substring(0, 5));
-			account.setAccountType(user.getAccountType());
-			account.setBalance(500);
-			account.setCreationDate(LocalDate.now());
-			user.setLoginName(user.getUserName().trim().toLowerCase());
-			user.setPassword("Hcl@123");
-			user.setStatus(accountRequestDTO.getStatus());
-			account.setUser(user);
-			accountRepository.save(account);
-			BeanUtils.copyProperties(account, accountDTO,"mesage");
-			accountDTO.setMessage("Account created sucessfully");
-			}else {
+		if (user != null) {
+			if (accountRequestDTO.getStatus().trim().equalsIgnoreCase("approve")) {
+				Account account = new Account();
+				String mobString = String.valueOf(user.getMobileNumber());
+				account.setAccountNumber("12345" + mobString.substring(0, 5));
+				account.setAccountType(user.getAccountType());
+				account.setBalance(500);
+				account.setCreationDate(LocalDate.now());
+				user.setLoginName(user.getUserName().trim().toLowerCase());
+				user.setPassword("Hcl@123");
+				user.setStatus(accountRequestDTO.getStatus());
+				account.setUser(user);
+				accountRepository.save(account);
+				BeanUtils.copyProperties(account, accountDTO, "mesage");
+				accountDTO.setMessage("Account created sucessfully");
+			} else {
 				user.setStatus(accountRequestDTO.getStatus());
 				accountDTO.setMessage("Application Rejected");
 			}
@@ -71,6 +70,27 @@ public class AccountServiceImpl implements AccountService {
 			throw new UserNotFoundException(accountRequestDTO.getUserId());
 		}
 		return accountDTO;
+	}
+
+	@Override
+	public List<AccountDTO> fetchAccounts(String accountNumber) {
+		logger.info("fetch accounts");
+		List<AccountDTO> listAccountDTO = null;
+		AccountDTO accountDTO = null;
+		listAccountDTO = new ArrayList<AccountDTO>();
+		List<Account> listAccount = accountRepository.findByAccountNumberNotLike(accountNumber);
+		for (Account account : listAccount) {
+			accountDTO = new AccountDTO();
+			accountDTO.setAccountId(account.getAccountId());
+			accountDTO.setAccountNumber(account.getAccountNumber());
+			accountDTO.setUserId(account.getUser().getUserId());
+			accountDTO.setAccountType(account.getAccountType());
+			accountDTO.setBalance(account.getBalance());
+			accountDTO.setCreationDate(account.getCreationDate());
+			// add accountDTO
+			listAccountDTO.add(accountDTO);
+		}
+		return listAccountDTO;
 	}
 
 }

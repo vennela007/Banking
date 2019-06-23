@@ -14,4 +14,8 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 	@Query(value = "select * from account where user_id=?", nativeQuery = true)
 	public List<Account> findUser(Long userId);
 
+	List<Account> findByAccountNumberNotLike(String accountNumber);
+
+	Account findByAccountNumber(String fromAccount);
+
 }

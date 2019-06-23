@@ -11,4 +11,6 @@ public interface AccountService {
 
 	public AccountDTO approve(AccountRequestDTO accountRequestDTO);
 
+	List<AccountDTO> fetchAccounts(String accountNumber);
+
 }
