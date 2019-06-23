@@ -11,7 +11,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.ing.bank.dto.AccountDTO;
@@ -34,14 +33,12 @@ public class AccountServiceImplTest {
 	@InjectMocks
 	AccountServiceImpl accountServiceImpl;
 
-
 	AccountRequestDTO accountRequestDTO;
-	
+
 	User user;
-	
+
 	List<Account> accounts;
-;
-	
+
 	Account account;
 
 	@Before
@@ -77,14 +74,14 @@ public class AccountServiceImplTest {
 		Assert.assertEquals("Application Rejected", accountDTO.getMessage());
 
 	}
-	
+
 	@Test
 	public void fetchAccountSummarySucess() {
 		Mockito.when(accountRepository.findUser(Mockito.anyLong())).thenReturn(accounts);
 		List<AccountDTO> accountDTOs = accountServiceImpl.fetchAccountSummary(Mockito.anyLong());
-		Assert.assertEquals("45678",accountDTOs.get(0).getAccountNumber());
+		Assert.assertEquals("45678", accountDTOs.get(0).getAccountNumber());
 	}
-	
+
 	@Test(expected = AccountNotFoundException.class)
 	public void fetchAccountSummaryFailure() {
 		accounts = new ArrayList<>();

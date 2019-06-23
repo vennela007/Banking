@@ -31,6 +31,7 @@ public class AccountController {
 
 	@GetMapping("summary/{userId}")
 	public ResponseEntity<List<AccountDTO>> getAccountSummary(@PathVariable Long userId) {
+
 		logger.info("getAccountSummary");
 		List<AccountDTO> accountDTOs = accountService.fetchAccountSummary(userId);
 		return new ResponseEntity<>(accountDTOs, HttpStatus.OK);
