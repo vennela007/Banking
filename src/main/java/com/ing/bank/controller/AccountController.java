@@ -1,5 +1,7 @@
 package com.ing.bank.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +40,11 @@ public class AccountController {
 		logger.info("approve");
 		AccountDTO accountDTO = accountService.approve(accountRequestDTO);
 		return new ResponseEntity<>(accountDTO, HttpStatus.ACCEPTED);
+	}
+
+	@GetMapping("/accounts/{accountNumber}")
+	public ResponseEntity<List<AccountDTO>> getAccounts(@PathVariable String accountNumber) {
+		List<AccountDTO> listAccountDTO = accountService.fetchAccounts(accountNumber);
+		return new ResponseEntity<>(listAccountDTO, HttpStatus.OK);
 	}
 }
