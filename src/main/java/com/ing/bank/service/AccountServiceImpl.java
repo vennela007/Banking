@@ -7,8 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.ing.bank.controller.AccountController;
 import com.ing.bank.dto.AccountDTO;
 import com.ing.bank.dto.AccountRequestDTO;
 import com.ing.bank.entity.Account;
@@ -27,7 +25,7 @@ public class AccountServiceImpl implements AccountService{
 	
 	@Autowired
 	AccountRepository accountRepository;
-
+	
 	@Override
 	public AccountDTO approve(AccountRequestDTO accountRequestDTO) {
 		logger.info("approve in service");
@@ -47,8 +45,9 @@ public class AccountServiceImpl implements AccountService{
 			account.setUser(user);
 			accountRepository.save(account);
 			BeanUtils.copyProperties(account, accountDTO,"mesage");
-			accountDTO.setMessage("Account created sucessfully");			
+			accountDTO.setMessage("Account created sucessfully");
 			}else {
+				user.setStatus(accountRequestDTO.getStatus());
 				accountDTO.setMessage("Application Rejected");
 			}
 			
