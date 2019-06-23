@@ -25,7 +25,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	}
 
 	@ExceptionHandler(value = InsufficientBalanceException.class)
-	public ResponseEntity<ResponseError> balanceError(Exception e) {
+	public ResponseEntity<ResponseError> balanceException(Exception e) {
 		ResponseError balanceError = new ResponseError();
 		balanceError.setErrorMessage(e.getMessage());
 		return new ResponseEntity<>(balanceError, HttpStatus.NOT_ACCEPTABLE);
@@ -34,9 +34,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(value = AccountNotFoundException.class)
 	public ResponseEntity<ResponseError> accountNotFound(Exception e) {
-		ResponseError balanceError = new ResponseError();
-		balanceError.setErrorMessage(e.getMessage());
-		return new ResponseEntity<>(balanceError, HttpStatus.NOT_ACCEPTABLE);
+		ResponseError balanceErrors= new ResponseError();
+		balanceErrors.setErrorMessage(e.getMessage());
+		return new ResponseEntity<>(balanceErrors, HttpStatus.NOT_ACCEPTABLE);
 	}
 
 	@ExceptionHandler(value = TransactionNotFoundException.class)

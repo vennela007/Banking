@@ -40,7 +40,7 @@ public class Account implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User user;
-
+	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "account")
 	private List<Transaction> transactions;

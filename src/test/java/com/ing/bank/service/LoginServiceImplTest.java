@@ -14,9 +14,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import com.ing.bank.dto.UserDTO;
 import com.ing.bank.entity.User;
 import com.ing.bank.exception.LoginNotFoundException;
-import com.ing.bank.exception.UserNotFoundException;
 import com.ing.bank.repository.UserRepository;
-import com.ing.bank.service.LoginServiceImpl;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LoginServiceImplTest {
@@ -54,7 +52,7 @@ public class LoginServiceImplTest {
 		String password = "test";
 		Mockito.when(userRepository.findByLoginNameAndPassword(Mockito.anyString(), Mockito.anyString()))
 				.thenReturn(null);
-		UserDTO userDTO = loginServiceImpl.login(loginName, password);
+		loginServiceImpl.login(loginName, password);
 
 	}
 

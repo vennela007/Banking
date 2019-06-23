@@ -29,10 +29,10 @@ public class TransactionServiceImpl implements TransactionService {
 
 	public List<TransactionDTO> getAllTransactions(String accountNumber) {
 		
-		List<TransactionDTO> transactionDtoList = new ArrayList<TransactionDTO>();
+		List<TransactionDTO> transactionDtoList = new ArrayList<>();
 		List<Transaction> transactionList = transactionRepository.findByAccountNumber(accountNumber);
-		logger.info("Account no..."+accountNumber);
-		if (transactionList.size() > 0) {
+		logger.info("Account no...");
+		if (!transactionList.isEmpty()) {
 			for (Transaction transaction : transactionList) {
 				TransactionDTO transactionDTO = new TransactionDTO();
 				BeanUtils.copyProperties(transaction, transactionDTO);
@@ -68,7 +68,7 @@ public class TransactionServiceImpl implements TransactionService {
 			debitTransaction.setTransactionType("Debited");
 			debitTransaction.setTransactionDate(LocalDate.now());
 			debitTransaction.setAccount(debitedAccount);
-			logger.info("transferring amount....."+debitTransaction.getTransactionAmount());
+			logger.info("transferring amount.....");
 			Transaction creditTransaction = new Transaction();
 			creditTransaction.setFromAccount(transactionDTO.getFromAccount());
 			creditTransaction.setToAccount(transactionDTO.getToAccount());

@@ -86,6 +86,6 @@ public class AccountServiceImplTest {
 	public void fetchAccountSummaryFailure() {
 		accounts = new ArrayList<>();
 		Mockito.when(accountRepository.findUser(Mockito.anyLong())).thenReturn(accounts);
-		List<AccountDTO> accountDTOs = accountServiceImpl.fetchAccountSummary(Mockito.anyLong());
+		accountServiceImpl.fetchAccountSummary(Mockito.anyLong());
 	}
 }

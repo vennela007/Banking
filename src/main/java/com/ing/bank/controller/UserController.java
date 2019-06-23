@@ -27,6 +27,7 @@ public class UserController {
 	@PostMapping("/registration")
 	public ResponseEntity<UserDTO> userRegistration(@RequestBody UserDTO customerDTO) {
 		UserDTO responseCustomerDTO = customerService.userRegistration(customerDTO);
+
 		lOGGER.info("success");
 		return new ResponseEntity<>(responseCustomerDTO, HttpStatus.CREATED);
 	}

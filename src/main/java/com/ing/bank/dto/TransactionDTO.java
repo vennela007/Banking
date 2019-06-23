@@ -13,7 +13,7 @@ import lombok.Setter;
 public class TransactionDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	private Long transactionId;
 	private String fromAccount;
 	private String toAccount;
@@ -21,5 +21,4 @@ public class TransactionDTO implements Serializable {
 	private Double transactionAmount;
 	private String remarks;
 	private String transactionType;
-
 }

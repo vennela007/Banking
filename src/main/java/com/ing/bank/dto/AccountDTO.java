@@ -25,6 +25,7 @@ public class AccountDTO implements Serializable {
 	private String accountType;
 	private LocalDate creationDate;
 	private double balance;
+	private String status;
 	private Long userId;
 	private String message;
 

@@ -14,28 +14,29 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ing.bank.dto.UserDTO;
-import com.ing.bank.entity.User;
-import com.ing.bank.service.UserService;
+import com.ing.bank.dto.TransactionDTO;
+import com.ing.bank.entity.Transaction;
+import com.ing.bank.service.TransactionService;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(value = UserController.class)
-public class UserControllerTest {
+@WebMvcTest(value = TransactionController.class)
+public class TransactionControllerTest {
 	@Autowired
 	MockMvc mockMvc;
-
+	
 	@MockBean
-	UserService userService;
-	UserDTO userDTO;
-	User user;
+	TransactionService transactionService;
+	
+	Transaction transaction;
+	TransactionDTO transactionDTO;
+	
 	@Test
-	public void userRegistrationTest() throws Exception {
-		userDTO = new UserDTO();
-		userDTO.setAccountType("savings");
-		user = new User();
-		user.setAccountType("savings");
-		Mockito.when(userService.userRegistration(userDTO)).thenReturn(userDTO);
-		mockMvc.perform(post("/api/registration").contentType(MediaType.APPLICATION_JSON).content(asJsonString(userDTO)))
+	public void fundTransferTest() throws Exception {
+		transactionDTO = new TransactionDTO();
+		transaction =  new Transaction();
+		transaction.setRemarks("ATM");
+		Mockito.when(transactionService.fundTransfer(transactionDTO)).thenReturn(transactionDTO);
+		mockMvc.perform(post("/api/transfer").contentType(MediaType.APPLICATION_JSON).content(asJsonString(transactionDTO)))
 		.andExpect(MockMvcResultMatchers.status().isCreated());
 	}
 	
@@ -46,4 +47,6 @@ public class UserControllerTest {
 			throw new RuntimeException(e);
 		}
 	}
-}
+	}
+	
+

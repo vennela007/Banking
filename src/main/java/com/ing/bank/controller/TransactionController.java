@@ -26,9 +26,9 @@ public class TransactionController {
 	@Autowired
 	TransactionService transactionService;
 
-	@PutMapping("/api/transactions")
+	@PutMapping("/transactions")
 	public ResponseEntity<List<TransactionDTO>> getAllTransactions(@RequestBody AccountNumberDTO accountNumberDTO) {
-		logger.info("inside transaction list...."+accountNumberDTO.getAccountNumber());
+		logger.info("inside transaction list");
 		List<TransactionDTO> transactionList = transactionService.getAllTransactions(accountNumberDTO.getAccountNumber());
 		return new ResponseEntity<>(transactionList, HttpStatus.OK);
 

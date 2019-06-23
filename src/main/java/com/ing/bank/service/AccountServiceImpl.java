@@ -31,9 +31,9 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public List<AccountDTO> fetchAccountSummary(Long userId) {
 		logger.info("fetchAccountSummary in service");
-		List<AccountDTO> accountDTOs = new ArrayList<AccountDTO>();
+		List<AccountDTO> accountDTOs = new ArrayList<>();
 		List<Account> accounts = accountRepository.findUser(userId);
-		if(accounts.size()>0) {
+		if(!accounts.isEmpty()) {
 		for (Account account : accounts) {
 			AccountDTO accountDTO = new AccountDTO();
 			BeanUtils.copyProperties(account, accountDTO);
@@ -84,7 +84,7 @@ public class AccountServiceImpl implements AccountService {
 		logger.info("fetch accounts");
 		List<AccountDTO> listAccountDTO = null;
 		AccountDTO accountDTO = null;
-		listAccountDTO = new ArrayList<AccountDTO>();
+		listAccountDTO = new ArrayList<>();
 		List<Account> listAccount = accountRepository.findByAccountNumberNotLike(accountNumber);
 		for (Account account : listAccount) {
 			accountDTO = new AccountDTO();
