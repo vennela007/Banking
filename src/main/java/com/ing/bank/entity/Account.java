@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,6 +26,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 
 public class Account implements Serializable {
 
@@ -40,7 +42,7 @@ public class Account implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User user;
-	
+
 	@JsonManagedReference
 	@OneToMany(mappedBy = "account")
 	private List<Transaction> transactions;
