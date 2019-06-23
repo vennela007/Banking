@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.ing.bank.dto.UserDTO;
 import com.ing.bank.entity.User;
 import com.ing.bank.exception.LoginNotFoundException;
-import com.ing.bank.exception.UserNotFoundException;
 import com.ing.bank.repository.UserRepository;
 
 @Service

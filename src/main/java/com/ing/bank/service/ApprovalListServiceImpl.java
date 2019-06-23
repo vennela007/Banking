@@ -18,45 +18,35 @@ public class ApprovalListServiceImpl implements ApprovalListService {
 
 	@Override
 	public List<UserDTO> approvalList(long userId) {
-		
-		User user=userRepository.findByUserId(userId);
-		System.out.println(user.getUserName());
-		System.out.println(user.getRole());
-		List<User> userList=null;
-		List<UserDTO> userListDto=new ArrayList<UserDTO>();
-		System.out.println(user.getRole().equalsIgnoreCase("admin"));
-		System.out.println(user.getRole().toString().equals("admin"));
-		if(user.getRole().equalsIgnoreCase("admin")||user.getRole().equals("admin"))
-				{
-			
-		           userList=userRepository.findByStatusAndRole("inProgress","user");
-		           
-		         System.out.println(userList.size());
-		           for (int i = 0; i < userList.size(); i++) {
-		   			UserDTO userDTO=new UserDTO();
-		   			userDTO.setUserId(userList.get(i).getUserId());
-		   			userDTO.setAadharNumber(userList.get(i).getAadharNumber());
-		   			userDTO.setAccountType(userList.get(i).getAccountType());
-		   			userDTO.setAddress(userList.get(i).getAddress());
-		   			userDTO.setAge(userList.get(i).getAge());
-		   			userDTO.setCreationDate(userList.get(i).getCreationDate());
-		   			userDTO.setEmail(userList.get(i).getEmail());
-		   			userDTO.setLoginName(userList.get(i).getLoginName());
-		   			userDTO.setMobileNumber(userList.get(i).getMobileNumber());
-		   			userDTO.setNominee(userList.get(i).getNominee());
-		   			userDTO.setNomineeRelation(userList.get(i).getNomineeRelation());
-		   			userDTO.setPassword(userList.get(i).getPassword());
-		   			userDTO.setRole(userList.get(i).getRole());
-		   			userDTO.setStatus(userList.get(i).getStatus());
-		   			userListDto.add(userDTO);
-		   		}
-				}
-		else
-		{
-			//throw new exception()
+
+		User user = userRepository.findByUserId(userId);
+		List<User> userList = null;
+		List<UserDTO> userListDto = new ArrayList<UserDTO>();
+		if (user.getRole().equalsIgnoreCase("admin") || user.getRole().equals("admin")) {
+
+			userList = userRepository.findByStatusAndRole("inProgress", "user");
+			for (int i = 0; i < userList.size(); i++) {
+				UserDTO userDTO = new UserDTO();
+				userDTO.setUserId(userList.get(i).getUserId());
+				userDTO.setAadharNumber(userList.get(i).getAadharNumber());
+				userDTO.setAccountType(userList.get(i).getAccountType());
+				userDTO.setAddress(userList.get(i).getAddress());
+				userDTO.setAge(userList.get(i).getAge());
+				userDTO.setCreationDate(userList.get(i).getCreationDate());
+				userDTO.setEmail(userList.get(i).getEmail());
+				userDTO.setLoginName(userList.get(i).getLoginName());
+				userDTO.setMobileNumber(userList.get(i).getMobileNumber());
+				userDTO.setNominee(userList.get(i).getNominee());
+				userDTO.setNomineeRelation(userList.get(i).getNomineeRelation());
+				userDTO.setPassword(userList.get(i).getPassword());
+				userDTO.setRole(userList.get(i).getRole());
+				userDTO.setStatus(userList.get(i).getStatus());
+				userListDto.add(userDTO);
+			}
+		} else {
+			// throw new exception()
 		}
-		
-		
+
 		return userListDto;
 	}
 
