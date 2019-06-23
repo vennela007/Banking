@@ -32,5 +32,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<>(balanceError, HttpStatus.NOT_ACCEPTABLE);
 
 	}
+	
+	@ExceptionHandler(value = AccountNotFoundException.class)
+	public ResponseEntity<ResponseError> accountNotFound(Exception e) {
+		ResponseError balanceError = new ResponseError();
+		balanceError.setErrorMessage(e.getMessage());
+		return new ResponseEntity<>(balanceError, HttpStatus.NOT_ACCEPTABLE);
+
+	}
 
 }

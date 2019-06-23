@@ -31,6 +31,7 @@ public class AccountController {
 
 	@GetMapping("summary/{userId}")
 	public ResponseEntity<List<AccountDTO>> getAccountSummary(@PathVariable Long userId) {
+		logger.info("getAccountSummary");
 		List<AccountDTO> accountDTOs = accountService.fetchAccountSummary(userId);
 		return new ResponseEntity<>(accountDTOs, HttpStatus.OK);
 
@@ -45,6 +46,7 @@ public class AccountController {
 
 	@PutMapping("/accounts")
 	public ResponseEntity<List<AccountDTO>> getAccounts(@RequestBody AccountNumberDTO accountNumberDTO) {
+		logger.info("getAccounts");
 		List<AccountDTO> listAccountDTO = accountService.fetchAccounts(accountNumberDTO.getAccountNumber());
 		return new ResponseEntity<>(listAccountDTO, HttpStatus.OK);
 	}

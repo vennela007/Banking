@@ -14,6 +14,7 @@ import com.ing.bank.dto.AccountDTO;
 import com.ing.bank.dto.AccountRequestDTO;
 import com.ing.bank.entity.Account;
 import com.ing.bank.entity.User;
+import com.ing.bank.exception.AccountNotFoundException;
 import com.ing.bank.exception.UserNotFoundException;
 import com.ing.bank.repository.AccountRepository;
 import com.ing.bank.repository.UserRepository;
@@ -29,12 +30,17 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public List<AccountDTO> fetchAccountSummary(Long userId) {
+		logger.info("fetchAccountSummary in service");
 		List<AccountDTO> accountDTOs = new ArrayList<AccountDTO>();
 		List<Account> accounts = accountRepository.findUser(userId);
+		if(accounts.size()>0) {
 		for (Account account : accounts) {
 			AccountDTO accountDTO = new AccountDTO();
 			BeanUtils.copyProperties(account, accountDTO);
 			accountDTOs.add(accountDTO);
+		}
+		}else {
+			throw new AccountNotFoundException();
 		}
 		return accountDTOs;
 
