@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ing.bank.dto.UserDTO;
-
 import com.ing.bank.service.UserService;
 import com.ing.bank.service.UserServiceImpl;
 
@@ -28,7 +27,6 @@ public class UserController {
 	@PostMapping("/registration")
 	public ResponseEntity<UserDTO> userRegistration(@RequestBody UserDTO customerDTO) {
 		UserDTO responseCustomerDTO = customerService.userRegistration(customerDTO);
-
 		lOGGER.info("success");
 		return new ResponseEntity<>(responseCustomerDTO, HttpStatus.CREATED);
 	}

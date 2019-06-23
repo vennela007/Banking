@@ -1,6 +1,8 @@
 package com.ing.bank.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,20 +24,20 @@ public class AccountServiceImpl implements AccountService {
 
 	@Autowired
 	private AccountRepository accountRepository;
-	@Autowired
+
 	private UserRepository userRepository;
 
 	@Override
-	public AccountDTO fetchAccountSummary(Long userId) {
-		AccountDTO accountDTO = new AccountDTO();
-		Account account = accountRepository.findUser(userId);
-		accountDTO.setAccountId(account.getAccountId());
-		accountDTO.setAccountNumber(account.getAccountNumber());
-		accountDTO.setAccountType(account.getAccountType());
-		accountDTO.setBalance(account.getBalance());
-		accountDTO.setCreationDate(account.getCreationDate());
-		accountDTO.setStatus(account.getUser().getStatus());
-		return accountDTO;
+	public List<AccountDTO> fetchAccountSummary(Long userId) {
+		List<AccountDTO> accountDTOs = new ArrayList<AccountDTO>();
+		List<Account> accounts = accountRepository.findUser(userId);
+		for (Account account : accounts) {
+			AccountDTO accountDTO = new AccountDTO();
+			BeanUtils.copyProperties(account, accountDTO);
+			accountDTOs.add(accountDTO);
+		}
+		return accountDTOs;
+
 	}
 
 	@Override
@@ -43,6 +45,7 @@ public class AccountServiceImpl implements AccountService {
 		logger.info("approve in service");
 		AccountDTO accountDTO = new AccountDTO();
 		User user = userRepository.findById(accountRequestDTO.getUserId()).orElse(null);
+
 		if (user != null) {
 			if (accountRequestDTO.getStatus().trim().equalsIgnoreCase("approve")) {
 				Account account = new Account();
@@ -68,6 +71,27 @@ public class AccountServiceImpl implements AccountService {
 			throw new UserNotFoundException(accountRequestDTO.getUserId());
 		}
 		return accountDTO;
+	}
+
+	@Override
+	public List<AccountDTO> fetchAccounts(String accountNumber) {
+		logger.info("fetch accounts");
+		List<AccountDTO> listAccountDTO = null;
+		AccountDTO accountDTO = null;
+		listAccountDTO = new ArrayList<AccountDTO>();
+		List<Account> listAccount = accountRepository.findByAccountNumberNotLike(accountNumber);
+		for (Account account : listAccount) {
+			accountDTO = new AccountDTO();
+			accountDTO.setAccountId(account.getAccountId());
+			accountDTO.setAccountNumber(account.getAccountNumber());
+			accountDTO.setUserId(account.getUser().getUserId());
+			accountDTO.setAccountType(account.getAccountType());
+			accountDTO.setBalance(account.getBalance());
+			accountDTO.setCreationDate(account.getCreationDate());
+			// add accountDTO
+			listAccountDTO.add(accountDTO);
+		}
+		return listAccountDTO;
 	}
 
 }
