@@ -22,7 +22,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-
 public class Transaction implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -30,8 +29,8 @@ public class Transaction implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long transactionId;
-	private Long fromAccount;
-	private Long toAccount;
+	private String fromAccount;
+	private String toAccount;
 	private LocalDate transactionDate;
 	private Double transactionAmount;
 	private String remarks;

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -21,6 +22,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		ResponseError error = new ResponseError();
 		error.setErrorMessage(e.getMessage());
 		return new ResponseEntity<>(error, HttpStatus.CREATED);
+
+	}
+	
+	@ExceptionHandler(value = TransactionNotFoundException.class)
+	public ResponseEntity<ResponseError> transactionError(Exception e) {
+		ResponseError error = new ResponseError();
+		error.setErrorMessage(e.getMessage());
+		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 
 	}
 

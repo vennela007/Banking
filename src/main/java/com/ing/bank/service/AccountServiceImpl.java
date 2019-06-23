@@ -48,6 +48,7 @@ public class AccountServiceImpl implements AccountService {
 				Account account = new Account();
 				String mobString = String.valueOf(user.getMobileNumber());
 				account.setAccountNumber("12345" + mobString.substring(0, 5));
+				
 				account.setAccountType(user.getAccountType());
 				account.setBalance(500);
 				account.setCreationDate(LocalDate.now());
