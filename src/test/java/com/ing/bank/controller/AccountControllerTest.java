@@ -19,19 +19,20 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ing.bank.controller.AccountController;
 import com.ing.bank.dto.AccountDTO;
 import com.ing.bank.dto.AccountRequestDTO;
 import com.ing.bank.service.AccountService;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(value = AccountController.class)
+@WebMvcTest(value = AccountController.class, secure = false)
 public class AccountControllerTest {
 
 	@Autowired
-	MockMvc mockMvc;
+	private MockMvc mockMvc;
 
 	@MockBean
-	AccountService accountService;
+	private AccountService accountService;
 
 	@Test
 	public void approve() throws JsonProcessingException, Exception {
@@ -67,4 +68,5 @@ public class AccountControllerTest {
 		ObjectMapper objectMapper = new ObjectMapper();
 		return objectMapper.writeValueAsString(object);
 	}
+
 }

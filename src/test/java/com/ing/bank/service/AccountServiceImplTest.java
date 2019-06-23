@@ -16,6 +16,7 @@ import com.ing.bank.dto.AccountRequestDTO;
 import com.ing.bank.entity.User;
 import com.ing.bank.repository.AccountRepository;
 import com.ing.bank.repository.UserRepository;
+import com.ing.bank.service.AccountServiceImpl;
 
 @RunWith(SpringRunner.class)
 public class AccountServiceImplTest {
@@ -37,12 +38,12 @@ public class AccountServiceImplTest {
 		accountRequestDTO = new AccountRequestDTO();
 		accountRequestDTO.setStatus("approve");
 		accountRequestDTO.setUserId(1L);
+
 		user = new User();
 		user.setUserId(1L);
 		user.setUserName("test");
 		user.setMobileNumber(999999999L);
 		user.setAccountType("Savings");
-
 	}
 
 	@Test

@@ -16,4 +16,6 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 
 	List<Account> findByAccountNumberNotLike(String accountNumber);
 
+	Account findByAccountNumber(String fromAccount);
+
 }
