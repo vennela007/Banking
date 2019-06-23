@@ -25,6 +25,14 @@ public class ApprovalListServiceImpl implements ApprovalListService {
 		if (user.getRole().equalsIgnoreCase("admin") || user.getRole().equals("admin")) {
 
 			userList = userRepository.findByStatusAndRole("inProgress", "user");
+
+		List<User> userList = null;
+		List<UserDTO> userListDto = new ArrayList<>();
+
+		if (user.getRole().equalsIgnoreCase("admin") || user.getRole().equals("admin")) {
+
+			userList = userRepository.findByStatusAndRole("In progress","user");
+
 			for (int i = 0; i < userList.size(); i++) {
 				UserDTO userDTO = new UserDTO();
 				userDTO.setUserId(userList.get(i).getUserId());

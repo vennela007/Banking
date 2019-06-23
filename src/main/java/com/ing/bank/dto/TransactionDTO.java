@@ -2,7 +2,6 @@ package com.ing.bank.dto;
 
 import java.io.Serializable;
 
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,13 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class LoginDTO implements Serializable {
-	/**
-	* 
-	*/
-	private static final long serialVersionUID = 1L;
+public class TransactionDTO implements Serializable {
 
-	private String loginName;
-	private String password;
-	
+	private static final long serialVersionUID = 1L;
 }

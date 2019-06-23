@@ -7,6 +7,6 @@ import com.ing.bank.exception.UserNotFoundException;
 
 public interface LoginService {
 
-	UserDTO login(String loginName, String password) throws UserNotFoundException, IllegalAccessException, InvocationTargetException;
+	UserDTO login(String loginName, String password) throws IllegalAccessException, InvocationTargetException;
 
 }

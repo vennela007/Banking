@@ -19,7 +19,7 @@ public class LoginServiceImpl implements LoginService {
 	@Autowired
 	UserRepository userRepository;
 
-	public UserDTO login(String loginName, String password) throws IllegalAccessException, InvocationTargetException,LoginNotFoundException {
+	public UserDTO login(String loginName, String password) throws IllegalAccessException, InvocationTargetException{
 		lOGGER.info(loginName);
 		UserDTO userDTO = new UserDTO();
 		User user = userRepository.findByLoginNameAndPassword(loginName, password);

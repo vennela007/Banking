@@ -29,7 +29,7 @@ public class AccountController {
 	@GetMapping("summary/{userId}")
 	public ResponseEntity<AccountDTO> getAccountSummary(@PathVariable Long userId) {
 		AccountDTO accountDTO = accountService.fetchAccountSummary(userId);
-		return new ResponseEntity<>(accountDTO, HttpStatus.FOUND);
+		return new ResponseEntity<>(accountDTO, HttpStatus.OK);
 
 	}
 

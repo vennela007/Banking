@@ -1,4 +1,4 @@
-package com.ing.bank.IngBank.service;
+package com.ing.bank.ingbank.service;
 
 import java.lang.reflect.InvocationTargetException;
 
