@@ -22,7 +22,8 @@ public class AccountServiceImpl implements AccountService {
 
 	@Autowired
 	private AccountRepository accountRepository;
-	@Autowired
+
+
 	private UserRepository userRepository;
 
 	@Override
@@ -38,27 +39,29 @@ public class AccountServiceImpl implements AccountService {
 		return accountDTO;
 	}
 
+
 	@Override
 	public AccountDTO approve(AccountRequestDTO accountRequestDTO) {
 		logger.info("approve in service");
 		AccountDTO accountDTO = new AccountDTO();
 		User user = userRepository.findById(accountRequestDTO.getUserId()).orElse(null);
-		if (user != null) {
-			if (accountRequestDTO.getStatus().trim().equalsIgnoreCase("approve")) {
-				Account account = new Account();
-				String mobString = String.valueOf(user.getMobileNumber());
-				account.setAccountNumber("12345" + mobString.substring(0, 5));
-				account.setAccountType(user.getAccountType());
-				account.setBalance(500);
-				account.setCreationDate(LocalDate.now());
-				user.setLoginName(user.getUserName().trim().toLowerCase());
-				user.setPassword("Hcl@123");
-				user.setStatus(accountRequestDTO.getStatus());
-				account.setUser(user);
-				accountRepository.save(account);
-				BeanUtils.copyProperties(account, accountDTO, "mesage");
-				accountDTO.setMessage("Account created sucessfully");
-			} else {
+
+		if(user!=null) {
+			if(accountRequestDTO.getStatus().trim().equalsIgnoreCase("approve")) {
+			Account account = new Account();
+			String mobString = String.valueOf(user.getMobileNumber());
+			account.setAccountNumber("12345"+mobString.substring(0, 5));
+			account.setAccountType(user.getAccountType());
+			account.setBalance(500);
+			account.setCreationDate(LocalDate.now());
+			user.setLoginName(user.getUserName().trim().toLowerCase());
+			user.setPassword("Hcl@123");
+			user.setStatus(accountRequestDTO.getStatus());
+			account.setUser(user);
+			accountRepository.save(account);
+			BeanUtils.copyProperties(account, accountDTO,"mesage");
+			accountDTO.setMessage("Account created sucessfully");
+			}else {
 				user.setStatus(accountRequestDTO.getStatus());
 				accountDTO.setMessage("Application Rejected");
 			}
