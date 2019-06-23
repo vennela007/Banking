@@ -1,6 +1,8 @@
 package com.ing.bank.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,6 +48,7 @@ public class AccountControllerTest {
 
 	@Test
 	public void getSummary() throws Exception {
+		List<AccountDTO> accountDTOs = new ArrayList<>();
 		AccountDTO accountDTO = new AccountDTO();
 		accountDTO.setAccountId(1L);
 		accountDTO.setAccountNumber("aac111");
@@ -53,7 +56,8 @@ public class AccountControllerTest {
 		accountDTO.setBalance(35353);
 		accountDTO.setCreationDate(LocalDate.now());
 		accountDTO.setStatus("approved");
-		Mockito.when(accountService.fetchAccountSummary(Mockito.anyLong())).thenReturn(accountDTO);
+		accountDTOs.add(accountDTO);
+		Mockito.when(accountService.fetchAccountSummary(Mockito.anyLong())).thenReturn(accountDTOs);
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/summary/1").accept(MediaType.APPLICATION_JSON);
 		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 		String InputType = this.mapToJson(accountDTO);

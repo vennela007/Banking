@@ -1,5 +1,7 @@
 package com.ing.bank.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +29,9 @@ public class AccountController {
 	private AccountService accountService;
 
 	@GetMapping("summary/{userId}")
-	public ResponseEntity<AccountDTO> getAccountSummary(@PathVariable Long userId) {
-		AccountDTO accountDTO = accountService.fetchAccountSummary(userId);
-		return new ResponseEntity<>(accountDTO, HttpStatus.OK);
+	public ResponseEntity<List<AccountDTO>> getAccountSummary(@PathVariable Long userId) {
+		List<AccountDTO> accountDTOs = accountService.fetchAccountSummary(userId);
+		return new ResponseEntity<>(accountDTOs, HttpStatus.OK);
 
 	}
 

@@ -1,6 +1,8 @@
 package com.ing.bank.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,16 +29,23 @@ public class AccountServiceImpl implements AccountService {
 	private UserRepository userRepository;
 
 	@Override
-	public AccountDTO fetchAccountSummary(Long userId) {
-		AccountDTO accountDTO = new AccountDTO();
-		Account account = accountRepository.findUser(userId);
-		accountDTO.setAccountId(account.getAccountId());
-		accountDTO.setAccountNumber(account.getAccountNumber());
-		accountDTO.setAccountType(account.getAccountType());
-		accountDTO.setBalance(account.getBalance());
-		accountDTO.setCreationDate(account.getCreationDate());
-		accountDTO.setStatus(account.getUser().getStatus());
-		return accountDTO;
+	public List<AccountDTO> fetchAccountSummary(Long userId) {
+		List<AccountDTO> accountDTOs = new ArrayList<AccountDTO>();
+		List<Account> accounts = accountRepository.findUser(userId);
+		for(Account account: accounts) {
+			AccountDTO accountDTO = new AccountDTO();
+			BeanUtils.copyProperties(account, accountDTO);
+			accountDTOs.add(accountDTO);
+		}
+		/*
+		 * accountDTO.setAccountId(account.getAccountId());
+		 * accountDTO.setAccountNumber(account.getAccountNumber());
+		 * accountDTO.setAccountType(account.getAccountType());
+		 * accountDTO.setBalance(account.getBalance());
+		 * accountDTO.setCreationDate(account.getCreationDate());
+		 * accountDTO.setStatus(account.getUser().getStatus());
+		 */
+		return accountDTOs;
 	}
 
 
