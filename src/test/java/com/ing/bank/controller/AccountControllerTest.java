@@ -1,5 +1,7 @@
 package com.ing.bank.controller;
 
+import java.time.LocalDate;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -7,8 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -24,10 +29,10 @@ public class AccountControllerTest {
 
 	@Autowired
 	MockMvc mockMvc;
-	
+
 	@MockBean
-	AccountService  accountService;
-	
+	AccountService accountService;
+
 	@Test
 	public void approve() throws JsonProcessingException, Exception {
 		AccountRequestDTO accountRequestDTO = new AccountRequestDTO();
@@ -35,9 +40,29 @@ public class AccountControllerTest {
 		AccountDTO accountDTO = new AccountDTO();
 		accountDTO.setAccountId(1L);
 		Mockito.when(accountService.approve(accountRequestDTO)).thenReturn(accountDTO);
-		mockMvc.perform(MockMvcRequestBuilders.put("/api/approve").contentType(MediaType.APPLICATION_JSON).content(mapToJson(accountRequestDTO))).andExpect(MockMvcResultMatchers.status().isAccepted());
+		mockMvc.perform(MockMvcRequestBuilders.put("/api/approve").contentType(MediaType.APPLICATION_JSON)
+				.content(mapToJson(accountRequestDTO))).andExpect(MockMvcResultMatchers.status().isAccepted());
 	}
-	
+
+	@Test
+	public void getSummary() throws Exception {
+		AccountDTO accountDTO = new AccountDTO();
+		accountDTO.setAccountId(1L);
+		accountDTO.setAccountNumber("aac111");
+		accountDTO.setAccountType("saving");
+		accountDTO.setBalance(35353);
+		accountDTO.setCreationDate(LocalDate.now());
+		accountDTO.setStatus("approved");
+		Mockito.when(accountService.fetchAccountSummary(Mockito.anyLong())).thenReturn(accountDTO);
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/summary/1").accept(MediaType.APPLICATION_JSON);
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+		String InputType = this.mapToJson(accountDTO);
+		String OutputType = result.getResponse().getContentAsString();
+		MockHttpServletResponse response = result.getResponse();
+		System.out.println(OutputType.equals(InputType));
+
+	}
+
 	private String mapToJson(Object object) throws JsonProcessingException {
 		ObjectMapper objectMapper = new ObjectMapper();
 		return objectMapper.writeValueAsString(object);

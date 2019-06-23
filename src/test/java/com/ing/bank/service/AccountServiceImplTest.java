@@ -17,33 +17,32 @@ import com.ing.bank.entity.User;
 import com.ing.bank.repository.AccountRepository;
 import com.ing.bank.repository.UserRepository;
 
-
 @RunWith(SpringRunner.class)
 public class AccountServiceImplTest {
-	
+
 	@Mock
 	UserRepository userRepository;
-	
+
 	@Mock
 	AccountRepository accountRepository;
-	
+
 	@InjectMocks
 	AccountServiceImpl accountServiceImpl;
-	
+
 	AccountRequestDTO accountRequestDTO;
 	User user;
-	
+
 	@Before
 	public void setUp() {
 		accountRequestDTO = new AccountRequestDTO();
 		accountRequestDTO.setStatus("approve");
 		accountRequestDTO.setUserId(1L);
-		
 		user = new User();
 		user.setUserId(1L);
 		user.setUserName("test");
 		user.setMobileNumber(999999999L);
-		user.setAccountType("Savings");	
+		user.setAccountType("Savings");
+
 	}
 
 	@Test
@@ -51,16 +50,15 @@ public class AccountServiceImplTest {
 		Mockito.when(userRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(user));
 		AccountDTO accountDTO = accountServiceImpl.approve(accountRequestDTO);
 		Assert.assertEquals("Account created sucessfully", accountDTO.getMessage());
-		
+
 	}
-	
+
 	@Test
 	public void approveFailure() {
 		Mockito.when(userRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(user));
 		accountRequestDTO.setStatus("reject");
 		AccountDTO accountDTO = accountServiceImpl.approve(accountRequestDTO);
 		Assert.assertEquals("Application Rejected", accountDTO.getMessage());
-		
-	}
 
+	}
 }

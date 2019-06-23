@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,16 +21,22 @@ import com.ing.bank.service.AccountService;
 @RequestMapping("/api")
 @CrossOrigin(allowedHeaders = { "*", "*/" }, origins = { "*", "*/" })
 public class AccountController {
-	
-	private static final Logger logger=LoggerFactory.getLogger(AccountController.class);
-	
+	private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
+
 	@Autowired
-	AccountService  accountService;
+	private AccountService accountService;
+
+	@GetMapping("summary/{userId}")
+	public ResponseEntity<AccountDTO> getAccountSummary(@PathVariable Long userId) {
+		AccountDTO accountDTO = accountService.fetchAccountSummary(userId);
+		return new ResponseEntity<>(accountDTO, HttpStatus.OK);
+
+	}
 
 	@PutMapping("/approve")
-	public ResponseEntity<AccountDTO> approve(@RequestBody AccountRequestDTO accountRequestDTO){
+	public ResponseEntity<AccountDTO> approve(@RequestBody AccountRequestDTO accountRequestDTO) {
 		logger.info("approve");
 		AccountDTO accountDTO = accountService.approve(accountRequestDTO);
-		return new ResponseEntity<>(accountDTO,HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(accountDTO, HttpStatus.ACCEPTED);
 	}
 }
